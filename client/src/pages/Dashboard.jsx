@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview')
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false) // State to control chatbot visibility
   
   const stats = [
     { name: 'Workouts Completed', value: '24', change: '+3 this week' },
@@ -17,6 +18,11 @@ const Dashboard = () => {
     { id: 3, name: 'Core & Abs', type: 'Strength', duration: '25 min', completed: '4 days ago' },
     { id: 4, name: 'Upper Body Focus', type: 'Strength', duration: '40 min', completed: '1 week ago' }
   ]
+
+  // Toggle chatbot window visibility
+  const toggleChatbot = () => {
+    setIsChatbotOpen(!isChatbotOpen)
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-gray-50 min-h-screen">
@@ -138,92 +144,42 @@ const Dashboard = () => {
           </div>
         )}
         
-        {activeTab === 'activities' && (
-          <div className="overflow-hidden">
-            <ul className="divide-y divide-gray-100">
-              {activities.map((activity) => (
-                <li key={activity.id} className="px-8 py-5 hover:bg-gray-50 transition-colors duration-150">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 h-12 w-12 rounded-full bg-[#48c4a4] flex items-center justify-center text-white font-medium text-lg shadow-md">
-                      {activity.type.charAt(0)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-base font-medium text-gray-900 truncate">
-                        {activity.name}
-                      </p>
-                      <p className="text-sm text-gray-500 mt-1">
-                        {activity.type} • {activity.duration}
-                      </p>
-                    </div>
-                    <div className="text-sm text-gray-500 flex items-center space-x-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#48c4a4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span>{activity.completed}</span>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <div className="bg-gray-50 px-8 py-4 flex justify-center">
-              <button
-                type="button"
-                className="text-sm font-medium text-[#48c4a4] hover:text-[#3aaa8d] transition-colors duration-200 flex items-center"
-              >
-                View all activities
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        )}
-        
-        {activeTab === 'goals' && (
-          <div className="p-8">
-            <div className="space-y-8">
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Weekly Goal</h3>
-                  <span className="text-[#48c4a4] text-lg font-bold">75%</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-3 mb-4 overflow-hidden">
-                  <div className="bg-[#48c4a4] h-3 rounded-full w-3/4"></div>
-                </div>
-                <div className="flex justify-between text-sm text-gray-600">
-                  <span className="font-medium">Progress: 3/4 workouts</span>
-                  <span className="text-[#48c4a4] font-medium">Great progress!</span>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Monthly Goal</h3>
-                  <span className="text-[#48c4a4] text-lg font-bold">67%</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-3 mb-4 overflow-hidden">
-                  <div className="bg-[#48c4a4] h-3 rounded-full w-2/3"></div>
-                </div>
-                <div className="flex justify-between text-sm text-gray-600">
-                  <span className="font-medium">Progress: 10/15 workouts</span>
-                  <span className="text-[#48c4a4] font-medium">On track!</span>
-                </div>
-              </div>
-              
-              <div className="mt-10 flex justify-center">
-                <button
-                  type="button"
-                  className="px-6 py-3 text-sm font-medium rounded-full shadow-lg text-white bg-[#48c4a4] hover:bg-[#3aaa8d] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#48c4a4] flex items-center"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
-                  Set New Goal
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Chatbot Iframe */}
+        {isChatbotOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+    <div className="relative w-[400px] h-[500px] bg-white rounded-xl shadow-lg">
+      {/* Chatbot iframe */}
+      <iframe
+        src="https://www.chatbase.co/chatbot-iframe/iodQ0y8agMsYm2oO6BbK6"
+        width="100%"
+        height="100%"
+        frameBorder="0"
+        title="Chatbot"
+        className="rounded-xl"
+      />
+      
+      {/* Close button */}
+      <button
+        onClick={toggleChatbot}
+        className="absolute top-2 right-2 bg-black text-white rounded-full p-2"
+      >
+        X
+      </button>
+    </div>
+  </div>
+)}
+
+{/* Side Chatbot Button (unchanged) */}
+{!isChatbotOpen && (
+  <button
+    onClick={toggleChatbot}
+    className="fixed bottom-10 right-10 bg-black text-white rounded-full p-4 shadow-lg hover:bg-[#3aaa8d] transition-all duration-300"
+  >
+    💬
+  </button>
+)}
+
+
       </div>
     </div>
   )

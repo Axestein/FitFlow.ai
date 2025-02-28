@@ -23,10 +23,10 @@ const Footer = () => {
           {/* Left Column */}
           <div className="backdrop-blur-lg bg-black/5 p-6 rounded-2xl border border-black/5">
             <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4">
-              10xCoders
+              FitFlow
             </h3>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Unlock the resources, guidance, and community you need to master tech skills, land your dream job, and accelerate your career growth.
+              Achieve your fitness goals with our AI-powered platform. Track your workouts, compete with friends, and access expert guidance to stay on top of your health and fitness journey.
             </p>
             <div className="flex gap-6 text-2xl">
               <a href="#" className="transform hover:scale-110 transition-all duration-300 text-gray-600 hover:text-blue-400">
@@ -48,7 +48,7 @@ const Footer = () => {
           <div className="backdrop-blur-lg bg-black/5 p-6 rounded-2xl border border-black/5">
             <h4 className="text-xl font-bold text-blue-400 mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              {['Home', 'Features', 'Roadmap', 'Community', 'Contact'].map((link) => (
+              {['Home', 'Features', 'Community', 'Tutorials', 'Contact'].map((link) => (
                 <li key={link}>
                   <a
                     href={`/${link.toLowerCase()}`}
@@ -66,13 +66,13 @@ const Footer = () => {
           <div className="backdrop-blur-lg bg-black/5 p-6 rounded-2xl border border-black/5">
             <h4 className="text-xl font-bold text-blue-400 mb-6">Contact Us</h4>
             <a
-              href="mailto:support@10xcoders.com"
+              href="mailto:support@fitflow.com"
               className="text-gray-600 hover:text-blue-400 transition-colors duration-300 block mb-6"
             >
-              support@10xcoders.com
+              support@fitflow.com
             </a>
             <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-6"></div>
-            <p className="text-gray-600">© 2025 10xCoders. All Rights Reserved.</p>
+            <p className="text-gray-600">© 2025 FitFlow. All Rights Reserved.</p>
           </div>
         </div>
 

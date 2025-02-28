@@ -1,43 +1,56 @@
 import React from 'react';
 import { FaClipboardList, FaPen, FaRoad, FaRobot } from 'react-icons/fa';
+import { FaHeartbeat, FaUsers, FaChartLine, FaAppleAlt, FaFileMedical } from 'react-icons/fa';
 
 const features = [
+  // New FitFlow Features
   {
-    Icon: FaClipboardList,
-    name: "Prepare for Interview & Get AI Analytics",
-    description: "Receive personalized AI insights and analytics to improve your interview performance.",
+    Icon: FaHeartbeat,
+    name: "Real-Time AI-Powered Physical Activity Recognition",
+    description: "Track and analyze your physical activities in real-time using AI-powered recognition.",
     href: "/",
     cta: "Learn more",
-    background: "/src/assets/interview.png",
+    background: "/src/assets/physical-activity.png",
     className: "lg:col-span-2 lg:row-span-1",
   },
   {
-    Icon: FaPen,
-    name: "Create & Enhance Your Resume",
-    description: "Build a professional resume or enhance your existing one with smart suggestions.",
+    Icon: FaUsers,
+    name: "Find Your Tribe, Leaderboard, and Exciting Rewards",
+    description: "Join fitness communities, compare your progress on the leaderboard, and earn rewards.",
     href: "/",
     cta: "Learn more",
-    background: "/src/assets/resume.png",
+    background: "/src/assets/community.png",
     className: "lg:col-span-1 lg:row-span-1",
   },
   {
-    Icon: FaRobot,
-    name: "AI-powered Personalized Doubt Solving",
-    description: "Get personalized AI-driven answers to your technical queries at any time.",
+    Icon: FaChartLine,
+    name: "Interactive 3D Body Widget for User-Centric Health & Fitness",
+    description: "Visualize and interact with your body stats through an intuitive 3D widget.",
     href: "/",
     cta: "Learn more",
-    background: "/src/assets/esmoai.png",
+    background: "/src/assets/body-widget.png",
     className: "lg:col-span-1 lg:row-span-1",
   },
   {
-    Icon: FaRoad,
-    name: "Roadmaps, Resources & Communities",
-    description: "Access curated roadmaps, resources, and events to stay updated in the tech industry.",
+    Icon: FaAppleAlt,
+    name: "AI Personalized Nutrition Plan",
+    description: "Get a personalized nutrition plan tailored to your fitness goals and health needs.",
     href: "/",
     cta: "Learn more",
-    background: "/src/assets/roadmap.png",
+    background: "/src/assets/nutrition.png",
     className: "lg:col-span-2 lg:row-span-1",
   },
+  /* 
+  {
+    Icon: FaFileMedical,
+    name: "Detailed Health Metrics Analysis and OPD/IPD Feature",
+    description: "Analyze your health metrics in detail and access OPD/IPD for medical consultations.",
+    href: "/",
+    cta: "Learn more",
+    background: "/src/assets/health-metrics.png",
+    className: "lg:col-span-2 lg:row-span-1",
+  }
+  */
 ];
 
 const Features = () => {
@@ -54,7 +67,7 @@ const Features = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-20">
           <h2 className="text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-6">
-            Key Features to Jumpstart Your Tech Career
+            Our USP's
           </h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
         </div>

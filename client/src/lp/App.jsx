@@ -9,12 +9,20 @@ function App() {
 
   return (
     <>
+    {/* Navbar Component */}
     <Navbar />
-    <Home />
-    <Features />
-    <Usp />
-    <Aboutus />
-    <Footer />
+
+    {/* Main Content Area */}
+    <div className="bg-gray-50 mt-16">
+      {/* Wrapping Routes for each page */}
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/usp" element={<Usp />} />
+        <Route path="/Aboutus" element={<Aboutus />} />
+        <Route path="/Footer" element={<Footer />} />
+      </Routes>
+    </div>
     </>
   )
 }
