@@ -16,6 +16,7 @@
     "@tensorflow/tfjs-backend-webgpu": "^4.22.0",
     "axios": "^1.8.1",
     "client": "file:",
+    "firebase": "^11.4.0",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",
     "react-beautiful-dnd": "^13.1.1",

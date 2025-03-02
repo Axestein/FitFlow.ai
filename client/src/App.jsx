@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom"; // Import necessary hooks and components
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom"; 
 import Navbar1 from "../src/lp/components/Navbar1.jsx";
 import Navbar from "../src/components/Navbar.jsx";
 import Home from "../src/lp/components//Home.jsx";
@@ -18,17 +18,27 @@ import Profile from "./pages/Profile";
 import PersonalizedExercise from "./pages/PersonalizedExercise";
 import Event from "./pages/Event";
 import Community from "./pages/Community";
+import BicepCurl from "./pages/Excercise/Bicepcurl.jsx";
+import Frontraises from "./pages/Excercise/Frontraises.jsx";
+import HighKnees from "./pages/Excercise/Highknees.jsx";
+import Lunges from "./pages/Excercise/Lunges.jsx";
+import Morning from "./pages/Excercise/Morning.jsx";
+import PullUp from "./pages/Excercise/Pullup.jsx";
+import Pushup from "./pages/Excercise/Pushup.jsx";
+import Shoulderpress from "./pages/Excercise/Shoulderpress.jsx";
+import Squats from "./pages/Excercise/Sqaut.jsx";
+import Deskcurls from "./pages/Excercise/DeskExcercise/Deskcurls.jsx";
+import Kneeraises from "./pages/Excercise/DeskExcercise/Kneeraises.jsx";
+import Hand from "./pages/Excercise/DeskExcercise/Hand.jsx";
 
 function App() {
-  const user = localStorage.getItem("token");  // Check if the user is logged in
-  const navigate = useNavigate();  // Initialize the navigate hook
+  const user = localStorage.getItem("token");
+  const navigate = useNavigate();  
 
   return (
     <Routes>
-      {/* Landing Page Routes */}
       <Route path="/" element={<LandingPage navigate={navigate} />} />
       
-      {/* Authentication Routes (If user is not logged in) */}
       {!user ? (
         <>
           <Route path="/signup" element={<Signup />} />
@@ -36,7 +46,6 @@ function App() {
           <Route path="/" element={<Navigate replace to="/login" />} />
         </>
       ) : (
-        // If user is logged in, show the main app routes
         <Route
           path="*"
           element={
@@ -53,6 +62,19 @@ function App() {
                   <Route path="/personalized-exercise" element={<PersonalizedExercise />} />
                   <Route path="/event" element={<Event />} />
                   <Route path="/community" element={<Community />} />
+                  
+                  <Route path="/bicepcurl" element={<BicepCurl />} />
+                  <Route path="/frontraises" element={<Frontraises />} />
+                  <Route path="/highknees" element={<HighKnees />} />
+                  <Route path="/lunges" element={<Lunges />} />
+                  <Route path="/pullup" element={<PullUp />} />
+                  <Route path="/pushup" element={<Pushup />} />
+                  <Route path="/shoulderpress" element={<Shoulderpress />} />
+                  <Route path="/morning" element={<Morning />} />
+                  <Route path="/squat" element={<Squats />} />
+                  <Route path="/deskcurls" element={<Deskcurls />} />
+                  <Route path="/hand" element={<Hand />} />
+                  <Route path="/kneeraises" element={<Kneeraises />} />
                 </Routes>
               </div>
             </>
@@ -63,7 +85,6 @@ function App() {
   );
 }
 
-// Landing Page Component (with the Get Started button that navigates to signup)
 const LandingPage = ({ navigate }) => {
   const handleGetStartedClick = () => {
     navigate('/signup');
@@ -71,9 +92,7 @@ const LandingPage = ({ navigate }) => {
 
   return (
     <>
-      {/* Navbar Component */}
       <Navbar1 />
-      {/* Main Content Area */}
       <div className="bg-gray-50 mt-16">
         <Routes>
         <Route

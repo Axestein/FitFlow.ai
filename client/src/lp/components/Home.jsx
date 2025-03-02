@@ -43,7 +43,7 @@ const LandingPage = () => {
           {/* Get Started Button */}
           <div className="mt-8 text-center">
             <a 
-              href="/login" 
+              href="/dashboard" 
               className="inline-block py-3 px-8 mt-4 text-xl font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:scale-105 transition-transform duration-300">
               Get Started
             </a>
