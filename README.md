@@ -13,7 +13,7 @@
 
 Smart AI-powered fitness companion with real‑time pose detection, gamified progress, personalized plans, and a community leaderboard. Built for speed, accessibility, and fun. ✨
 
-<img width="2143" height="3469" alt="Group 1707485530 (1)" src="https://github.com/user-attachments/assets/03af956d-4941-4162-963b-3db9408ab6f7" />
+<img width="2143" height="3469" alt="Group 1707485530 (1)" src="https://github.com/user-attachments/assets/3ee4ae15-ee4e-40e7-b0d3-707b34a97198" />
 
 </div>
 
