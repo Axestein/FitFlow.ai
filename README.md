@@ -190,6 +190,8 @@ Contributions are welcome! Feel free to open issues or PRs. Please keep code rea
 
 ---
 
+<img width="430" alt="shapes at 25-05-02 08 43 22" src="https://github.com/user-attachments/assets/77ce0c54-825c-4d88-ac6e-13118722ef08" />
+
 <div align="center">
 
 Built with ❤️, caffeine ☕, and lots of reps 🏋️ by the PixelForce team.
