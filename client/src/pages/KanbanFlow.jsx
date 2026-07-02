@@ -1,197 +1,163 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Plus, Trash2, GripHorizontal } from "lucide-react";
+import React, { useState } from 'react';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import {
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { Plus, Trash2, GripVertical } from 'lucide-react';
 
-const FitnessKanbanBoard = () => {
-  const [tasks, setTasks] = useState({
-    workoutPlans: [],
-    progressTracking: [],
-    completedWorkouts: [],
-    goalSetting: [],
-    nutritionPlan: [],
-    reminders: []
-  });
+// Sortable Item Component
+const SortableItem = ({ id, children, onDelete }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/tasks")
-      .then((response) => {
-        const fetchedTasks = response.data;
-        const newTasks = {
-          workoutPlans: [],
-          progressTracking: [],
-          completedWorkouts: [],
-          goalSetting: [],
-          nutritionPlan: [],
-          reminders: []
-        };
-        
-        fetchedTasks.forEach((task) => {
-          newTasks[task.column].push(task);
-        });
-        setTasks(newTasks);
-      })
-      .catch((error) => console.error("Error fetching tasks:", error));
-  }, []);
-
-  const handleDragEnd = (result) => {
-    const { source, destination } = result;
-    if (!destination) return;
-
-    const newTasks = { ...tasks };
-    const [movedTask] = newTasks[source.droppableId].splice(source.index, 1);
-    newTasks[destination.droppableId].splice(destination.index, 0, movedTask);
-    setTasks(newTasks);
-
-    axios.put(`http://localhost:5000/api/tasks/${movedTask.id}`, {
-      content: movedTask.content,
-      column: destination.droppableId
-    }).catch((error) => console.error("Error updating task:", error));
-  };
-
-  const addTaskToColumn = (column) => {
-    const newTask = prompt(`Enter a new task for the ${column} column:`);
-    if (newTask) {
-      const newTaskObj = { 
-        id: `task-${Date.now()}`, 
-        content: newTask, 
-        column 
-      };
-      
-      setTasks(prev => ({
-        ...prev,
-        [column]: [...prev[column], newTaskObj]
-      }));
-
-      axios.post("http://localhost:5000/api/tasks", newTaskObj)
-        .catch((error) => console.error("Error adding task:", error));
-    }
-  };
-
-  const removeTask = (taskId, column) => {
-    setTasks(prev => ({
-      ...prev,
-      [column]: prev[column].filter(task => task.id !== taskId)
-    }));
-
-    axios.delete(`http://localhost:5000/api/tasks/${taskId}`)
-      .catch((error) => console.error("Error removing task:", error));
-  };
-
-  const columnConfig = {
-    workoutPlans: { 
-      title: "Workout Plans", 
-      headerColor: "bg-gradient-to-r from-blue-500 to-blue-700",
-      bgColor: "bg-blue-100",
-      borderColor: "border-blue-300"
-    },
-    progressTracking: { 
-      title: "Progress Tracking", 
-      headerColor: "bg-gradient-to-r from-teal-500 to-teal-700",
-      bgColor: "bg-teal-100",
-      borderColor: "border-teal-300"
-    },
-    completedWorkouts: { 
-      title: "Completed Workouts", 
-      headerColor: "bg-gradient-to-r from-green-500 to-green-700",
-      bgColor: "bg-green-100",
-      borderColor: "border-green-300"
-    },
-    goalSetting: { 
-      title: "Goal Setting", 
-      headerColor: "bg-gradient-to-r from-purple-500 to-purple-700",
-      bgColor: "bg-purple-100",
-      borderColor: "border-purple-300"
-    },
-    nutritionPlan: { 
-      title: "Nutrition Plan", 
-      headerColor: "bg-gradient-to-r from-yellow-500 to-yellow-700",
-      bgColor: "bg-yellow-100",
-      borderColor: "border-yellow-300"
-    },
-    reminders: { 
-      title: "Reminders", 
-      headerColor: "bg-gradient-to-r from-orange-500 to-orange-700",
-      bgColor: "bg-orange-100",
-      borderColor: "border-orange-300"
-    }
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
   };
 
   return (
-    <div className="container mx-auto p-4 lg:p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-4xl font-extrabold text-gray-900 mb-12 text-center tracking-wide">🏋️ Employee Fitness Kanban Board 🥗</h1>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {Object.entries(columnConfig).map(([columnKey, config]) => (
-            <div 
-              key={columnKey} 
-              className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-300 flex flex-col transform transition duration-500 hover:scale-105"
-            >
-              <div className={`${config.headerColor} px-6 py-5 text-center text-white font-bold text-xl uppercase tracking-wider`}>
-                {config.title}
-                <span className="ml-2 text-sm font-normal opacity-80">
-                  ({tasks[columnKey].length})
-                </span>
-              </div>
-              <div className="flex-1 p-4">
-                <Droppable droppableId={columnKey}>
-                  {(provided) => (
-                    <div 
-                      ref={provided.innerRef} 
-                      {...provided.droppableProps}
-                      className={`min-h-[400px] ${config.bgColor} rounded-lg p-3 space-y-3`}
-                    >
-                      {tasks[columnKey].map((task, index) => (
-                        <Draggable 
-                          key={task.id} 
-                          draggableId={task.id} 
-                          index={index}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              className={`bg-white rounded-xl shadow-md border ${config.borderColor} 
-                                p-4 transition-all duration-200 hover:shadow-lg flex items-center justify-between`}
-                            >
-                              <div className="flex items-center space-x-3">
-                                <div 
-                                  {...provided.dragHandleProps}
-                                  className="text-gray-400 hover:text-gray-600 cursor-grab active:cursor-grabbing"
-                                >
-                                  <GripHorizontal size={16} />
-                                </div>
-                                <span className="text-gray-700 font-medium">{task.content}</span>
-                              </div>
-                              <button 
-                                onClick={() => removeTask(task.id, columnKey)}
-                                className="text-gray-400 hover:text-red-500 hover:bg-red-50 p-1 rounded-full transition-colors duration-200"
-                              >
-                                <Trash2 size={16} />
-                              </button>
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-                <button
-                  onClick={() => addTaskToColumn(columnKey)}
-                  className={`w-full mt-4 p-3 ${config.bgColor} ${config.borderColor} 
-                    border rounded-xl flex items-center justify-center text-gray-700 hover:bg-opacity-75`}
-                >
-                  <Plus className="mr-2" size={18} />
-                  Add New Task
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </DragDropContext>
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-lg mb-2 hover:bg-white/10 transition ${isDragging ? 'shadow-2xl' : ''}`}
+    >
+      <div {...attributes} {...listeners} className="cursor-grab">
+        <GripVertical className="h-5 w-5 text-gray-400" />
+      </div>
+      <span className="flex-1 text-white">{children}</span>
+      <button
+        onClick={() => onDelete(id)}
+        className="text-gray-400 hover:text-red-400 transition"
+      >
+        <Trash2 className="h-4 w-4" />
+      </button>
     </div>
   );
 };
 
-export default FitnessKanbanBoard;
+const KanbanFlow = () => {
+  const [items, setItems] = useState([
+    'Morning Workout',
+    'Track Calories',
+    'Drink 8 Glasses Water',
+    'Evening Stretch',
+  ]);
+  const [newItem, setNewItem] = useState('');
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      const oldIndex = items.indexOf(active.id);
+      const newIndex = items.indexOf(over.id);
+
+      setItems((items) => arrayMove(items, oldIndex, newIndex));
+    }
+  };
+
+  const handleAddItem = () => {
+    if (newItem.trim()) {
+      setItems([...items, newItem.trim()]);
+      setNewItem('');
+    }
+  };
+
+  const handleDeleteItem = (id) => {
+    setItems(items.filter((item) => item !== id));
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAddItem();
+    }
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto p-6">
+      <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
+        <h2 className="text-2xl font-bold text-white mb-6">Plan Your Day</h2>
+        <p className="text-gray-400 mb-6">Drag and drop to prioritize your tasks</p>
+
+        {/* Add New Item */}
+        <div className="flex gap-3 mb-6">
+          <input
+            type="text"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Add a new task..."
+            className="flex-1 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400"
+          />
+          <button
+            onClick={handleAddItem}
+            className="px-4 py-2 bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-medium rounded-lg hover:shadow-lg hover:shadow-emerald-400/30 transition-all"
+          >
+            <Plus className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Sortable List */}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={items}
+            strategy={verticalListSortingStrategy}
+          >
+            {items.map((item) => (
+              <SortableItem
+                key={item}
+                id={item}
+                onDelete={handleDeleteItem}
+              >
+                {item}
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
+
+        {items.length === 0 && (
+          <div className="text-center py-8 text-gray-500">
+            No tasks yet. Add some to get started!
+          </div>
+        )}
+
+        <div className="mt-4 text-xs text-gray-500 text-center">
+          {items.length} tasks • Drag to reorder
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default KanbanFlow;
