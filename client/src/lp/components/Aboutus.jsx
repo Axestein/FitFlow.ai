@@ -73,7 +73,7 @@ const AboutUs = () => {
         </div>
 
         {/* Team Section */}
-        <div className="text-center mb-16">
+        {/* <div className="text-center mb-16">
           <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-16">
             Meet Our Team
           </h2>
@@ -111,7 +111,7 @@ const AboutUs = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
 
       <style jsx>{`

@@ -1,11 +1,11 @@
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom"; 
 import Navbar1 from "../src/lp/components/Navbar1.jsx";
 import Navbar from "../src/components/Navbar.jsx";
-import Home from "../src/lp/components//Home.jsx";
-import Features from "../src/lp/components//Features.jsx";
-import Usp from "../src/lp/components//Usp.jsx";
-import Aboutus from "../src/lp/components//Aboutus.jsx";
-import Footer from "../src/lp/components//Footer.jsx";
+import Home from "../src/lp/components/Home.jsx";
+import Features from "../src/lp/components/Features.jsx";
+import Usp from "../src/lp/components/Usp.jsx";
+import Aboutus from "../src/lp/components/Aboutus.jsx";
+import Footer from "../src/lp/components/Footer.jsx";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Dashboard from "./pages/Dashboard";
@@ -33,53 +33,212 @@ import Hand from "./pages/Excercise/DeskExcercise/Hand.jsx";
 
 function App() {
   const user = localStorage.getItem("token");
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   return (
     <Routes>
+      {/* Landing page - always accessible without auth */}
       <Route path="/" element={<LandingPage navigate={navigate} />} />
       
-      {!user ? (
+      {/* Auth routes - always accessible */}
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      
+      {/* Protected routes - only with token */}
+      {user ? (
         <>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Navigate replace to="/login" />} />
-        </>
-      ) : (
-        <Route
-          path="*"
-          element={
+          <Route path="/dashboard" element={
             <>
               <Navbar />
               <div className="bg-gray-50 mt-16">
-                <Routes>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/leaderboard" element={<Leaderboard />} />
-                  <Route path="/dietplan" element={<DietPlan />} />
-                  <Route path="/excercise" element={<Exercise />} />
-                  <Route path="/kanbanflow" element={<KanbanFlow />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/personalized-exercise" element={<PersonalizedExercise />} />
-                  <Route path="/event" element={<Event />} />
-                  <Route path="/community" element={<Community />} />
-                  
-                  <Route path="/bicepcurl" element={<BicepCurl />} />
-                  <Route path="/frontraises" element={<Frontraises />} />
-                  <Route path="/highknees" element={<HighKnees />} />
-                  <Route path="/lunges" element={<Lunges />} />
-                  <Route path="/pullup" element={<PullUp />} />
-                  <Route path="/pushup" element={<Pushup />} />
-                  <Route path="/shoulderpress" element={<Shoulderpress />} />
-                  <Route path="/morning" element={<Morning />} />
-                  <Route path="/squat" element={<Squats />} />
-                  <Route path="/deskcurls" element={<Deskcurls />} />
-                  <Route path="/hand" element={<Hand />} />
-                  <Route path="/kneeraises" element={<Kneeraises />} />
-                </Routes>
+                <Dashboard />
               </div>
             </>
-          }
-        />
+          } />
+          
+          <Route path="/leaderboard" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Leaderboard />
+              </div>
+            </>
+          } />
+          
+          <Route path="/dietplan" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <DietPlan />
+              </div>
+            </>
+          } />
+          
+          <Route path="/excercise" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Exercise />
+              </div>
+            </>
+          } />
+          
+          <Route path="/kanbanflow" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <KanbanFlow />
+              </div>
+            </>
+          } />
+          
+          <Route path="/profile" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Profile />
+              </div>
+            </>
+          } />
+          
+          <Route path="/personalized-exercise" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <PersonalizedExercise />
+              </div>
+            </>
+          } />
+          
+          <Route path="/event" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Event />
+              </div>
+            </>
+          } />
+          
+          <Route path="/community" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Community />
+              </div>
+            </>
+          } />
+          
+          <Route path="/bicepcurl" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <BicepCurl />
+              </div>
+            </>
+          } />
+          
+          <Route path="/frontraises" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Frontraises />
+              </div>
+            </>
+          } />
+          
+          <Route path="/highknees" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <HighKnees />
+              </div>
+            </>
+          } />
+          
+          <Route path="/lunges" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Lunges />
+              </div>
+            </>
+          } />
+          
+          <Route path="/pullup" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <PullUp />
+              </div>
+            </>
+          } />
+          
+          <Route path="/pushup" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Pushup />
+              </div>
+            </>
+          } />
+          
+          <Route path="/shoulderpress" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Shoulderpress />
+              </div>
+            </>
+          } />
+          
+          <Route path="/morning" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Morning />
+              </div>
+            </>
+          } />
+          
+          <Route path="/squat" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Squats />
+              </div>
+            </>
+          } />
+          
+          <Route path="/deskcurls" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Deskcurls />
+              </div>
+            </>
+          } />
+          
+          <Route path="/hand" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Hand />
+              </div>
+            </>
+          } />
+          
+          <Route path="/kneeraises" element={
+            <>
+              <Navbar />
+              <div className="bg-gray-50 mt-16">
+                <Kneeraises />
+              </div>
+            </>
+          } />
+        </>
+      ) : (
+        // Redirect to login if trying to access protected routes without token
+        <Route path="*" element={<Navigate replace to="/login" />} />
       )}
     </Routes>
   );
@@ -94,19 +253,10 @@ const LandingPage = ({ navigate }) => {
     <>
       <Navbar1 />
       <div className="bg-gray-50 mt-16">
-        <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Home />
-              <Features />
-              <Aboutus />
-              <Footer />
-            </>
-          }
-        />
-        </Routes>
+        <Home />
+        <Features />
+        <Aboutus />
+        <Footer />
       </div>
     </>
   );

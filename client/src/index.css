@@ -1,3 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-dark text-cream font-body antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-teal text-dark font-semibold px-8 py-3 rounded-full 
+           hover:bg-brand-teal-dark transition-all duration-300 
+           shadow-lg shadow-brand-teal/20 hover:shadow-brand-teal/40;
+  }
+  .btn-secondary {
+    @apply border-2 border-brand-teal text-brand-teal font-semibold 
+           px-8 py-3 rounded-full hover:bg-brand-teal/10 
+           transition-all duration-300;
+  }
+  .glass-card {
+    @apply bg-dark-card/80 backdrop-blur-sm border border-dark-border rounded-2xl;
+  }
+}
