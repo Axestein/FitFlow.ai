@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Aditya from "../assets/Aditya.jpg";
 import Sameer from "../assets/Sameer.jpeg";
 import Arhaan from "../assets/Arhaan.jpeg";
-import Atharv from "../assets/ATharv.jpeg";
+import Atharv from "../assets/Atharv.jpeg";
 
 const Leaderboard = () => {
   const [timeframe, setTimeframe] = useState('weekly')
