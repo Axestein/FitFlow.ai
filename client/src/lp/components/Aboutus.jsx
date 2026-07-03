@@ -1,9 +1,9 @@
 import React from 'react';
 import { FiMail, FiLinkedin, FiTwitter } from 'react-icons/fi';
-import sameer0101 from '../Assets/sameer0101.jpg';
-import aditya0101 from '../Assets/aditya0101.jpg';
-import atharv from '../Assets/atharv.jpeg';
-import arhaan0101 from '../Assets/arhaan0101.jpg';
+// import sameer0101 from '../Assets/sameer0101.jpg';
+// import aditya0101 from '../Assets/aditya0101.jpg';
+// import atharv from '../Assets/atharv.jpeg';
+// import arhaan0101 from '../Assets/arhaan0101.jpg';
 
 const AboutUs = () => {
   const teamMembers = [
