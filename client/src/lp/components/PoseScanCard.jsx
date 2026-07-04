@@ -91,27 +91,27 @@ const easeInOutSine = (x) => -(Math.cos(Math.PI * x) - 1) / 2;
 // of twisting it. If you swap in a different character.glb, these numbers
 // are specific to *this* file's rig and would need recomputing.
 // ---------------------------------------------------------------------------
-// This model's bind pose holds the arms out in a T-pose. My exercise angles
-// assume arms resting DOWN at the sides (like a real standing person), so a
-// 90ish-degree correction is applied to the shoulders' baseline orientation
-// before anything else — everything downstream (flex axes below) is
-// recomputed relative to THAT corrected baseline, not the raw T-pose bind.
-// This is why the arms were windmilling: the same angle values meant
-// something completely different starting from a sideways arm vs a hanging
-// one, and the raw T-pose flex axis was poorly-conditioned to begin with.
+// Real hinge axes, computed directly from this model's bind pose. Flexion
+// (curl, raise, press, squat, lunge — anything that swings a limb forward)
+// happens around the body's own left-right (mediolateral) axis. The
+// previous version computed the axis perpendicular to that instead, which
+// is the abduction axis (sideways/lateral movement) — correct-looking math,
+// wrong motion, which is exactly why everything swung sideways instead of
+// forward. This version rotates directly around mediolateral, expressed in
+// each bone's own local frame.
 const CORRECTED_REST_ARM_L = new THREE.Quaternion(0.58629, 0.00367, -0.00083, 0.81009);
 const CORRECTED_REST_ARM_R = new THREE.Quaternion(0.58628, -0.00079, 0.00292, 0.81010);
 
 const FLEX_AXIS = {
-  LeftArm: new THREE.Vector3(-1.0000, 0.0000, 0.0001),
-  RightArm: new THREE.Vector3(1.0000, -0.0000, 0.0008),
-  LeftForeArm: new THREE.Vector3(-1.0000, 0.0000, 0.0001),
-  RightForeArm: new THREE.Vector3(1.0000, -0.0000, 0.0008),
-  LeftUpLeg: new THREE.Vector3(-0.0002, -0.0024, 1.0000),
-  RightUpLeg: new THREE.Vector3(0.0009, -0.0137, 0.9999),
-  LeftLeg: new THREE.Vector3(-0.0002, 0.0000, 1.0000),
-  RightLeg: new THREE.Vector3(0.0000, 0.0000, 1.0000),
-  Hips: new THREE.Vector3(0.0000, -0.0057, -1.0000),
+  LeftArm: new THREE.Vector3(-0.0001, -0.0000, -1.0000),
+  RightArm: new THREE.Vector3(-0.0008, 0.0000, 1.0000),
+  LeftForeArm: new THREE.Vector3(-0.0001, 0.0172, -0.9999),
+  RightForeArm: new THREE.Vector3(-0.0008, -0.0172, 0.9999),
+  LeftUpLeg: new THREE.Vector3(-0.9978, 0.0657, -0.0000),
+  RightUpLeg: new THREE.Vector3(-0.9978, -0.0657, 0.0000),
+  LeftLeg: new THREE.Vector3(-0.9997, 0.0235, -0.0002),
+  RightLeg: new THREE.Vector3(-0.9997, -0.0236, 0.0000),
+  Hips: new THREE.Vector3(1.0000, 0.0000, 0.0000),
 };
 
 // Mixamo bone names used by this rig.
