@@ -1,6 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import navbarlogo2 from '../assets/navbarlogo2.png';
+
+// Logomark echoes the hero's ball-and-stick pose rig: joints climbing in a
+// single ascending "flow" line, so the mark reads as the same visual
+// language as the product, not a stock icon.
+const Logo = () => (
+  <svg
+    viewBox="0 0 36 36"
+    className="h-9 w-9 shrink-0 transition-transform duration-300 group-hover:scale-105"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient id="navBg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#123027" />
+        <stop offset="100%" stopColor="#0B0F0E" />
+      </linearGradient>
+      <linearGradient id="navBone" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0%" stopColor="#1F6F5C" />
+        <stop offset="100%" stopColor="#7FE0C4" />
+      </linearGradient>
+      <radialGradient id="navBall" cx="35%" cy="30%" r="70%">
+        <stop offset="0%" stopColor="#DFFBF3" />
+        <stop offset="45%" stopColor="#48C4A4" />
+        <stop offset="100%" stopColor="#12463A" />
+      </radialGradient>
+    </defs>
+
+    <rect x="0.5" y="0.5" width="35" height="35" rx="10" fill="url(#navBg)" stroke="#48C4A4" strokeOpacity="0.25" />
+
+    <polyline
+      points="9,25 14,17 20,20 27,9"
+      fill="none"
+      stroke="url(#navBone)"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle cx="9" cy="25" r="2.4" fill="url(#navBall)" />
+    <circle cx="14" cy="17" r="2.4" fill="url(#navBall)" />
+    <circle cx="20" cy="20" r="2.4" fill="url(#navBall)" />
+    <circle cx="27" cy="9" r="3" fill="url(#navBall)" />
+  </svg>
+);
 
 const Navbar1 = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +53,7 @@ const Navbar1 = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const links = ['Home', 'Features'];
+  const links = ['Home', 'Features', 'About Us'];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4">
@@ -25,11 +66,7 @@ const Navbar1 = () => {
       >
         <div className="flex items-center justify-between px-5 py-3">
           <a href="/" className="flex items-center gap-2 group">
-            <img
-              src={navbarlogo2}
-              className="h-9 rounded-lg transition-transform duration-300 group-hover:scale-105"
-              alt="FitFlow"
-            />
+            <Logo />
             <span className="font-display font-semibold text-[#F6F4EE] tracking-tight hidden sm:block">
               FitFlow
             </span>

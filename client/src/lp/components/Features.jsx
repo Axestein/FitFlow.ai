@@ -1,131 +1,75 @@
 import React from 'react';
-import { FaClipboardList, FaPen, FaRoad, FaRobot } from 'react-icons/fa';
-import { FaHeartbeat, FaUsers, FaChartLine, FaAppleAlt, FaFileMedical } from 'react-icons/fa';
+import { Activity, Users, Apple, LineChart } from 'lucide-react';
 
 const features = [
-  // New FitFlow Features
   {
-    Icon: FaHeartbeat,
-    name: "Real-Time AI-Powered Physical Activity Recognition",
-    description: "Track and analyze your physical activities in real-time using AI-powered recognition.",
-    href: "/",
-    cta: "Learn more",
-    background: "/src/assets/physical-activity.png",
-    className: "lg:col-span-2 lg:row-span-1",
+    tag: 'POSE',
+    Icon: Activity,
+    name: 'Real-time activity recognition',
+    description:
+      'Your webcam becomes a coach. FitFlow reads joint angles frame by frame and calls out form issues the instant they happen.',
+    span: 'lg:col-span-2',
   },
   {
-    Icon: FaUsers,
-    name: "Find Your Tribe, Leaderboard, and Exciting Rewards",
-    description: "Join fitness communities, compare your progress on the leaderboard, and earn rewards.",
-    href: "/",
-    cta: "Learn more",
-    background: "/src/assets/community.png",
-    className: "lg:col-span-1 lg:row-span-1",
+    tag: 'SQUAD',
+    Icon: Users,
+    name: 'Leaderboard & rewards',
+    description:
+      'Compare streaks with friends, climb the weekly leaderboard, and unlock badges for consistency, not just intensity.',
+    span: 'lg:col-span-1',
   },
   {
-    Icon: FaChartLine,
-    name: "Interactive 3D Body Widget for User-Centric Health & Fitness",
-    description: "Visualize and interact with your body stats through an intuitive 3D widget.",
-    href: "/",
-    cta: "Learn more",
-    background: "/src/assets/body-widget.png",
-    className: "lg:col-span-1 lg:row-span-1",
+    tag: 'TRACK',
+    Icon: LineChart,
+    name: 'Progress you can see',
+    description:
+      'Every rep, set, and session rolls up into a dashboard that shows the trend, not just the number.',
+    span: 'lg:col-span-1',
   },
   {
-    Icon: FaAppleAlt,
-    name: "AI Personalized Nutrition Plan",
-    description: "Get a personalized nutrition plan tailored to your fitness goals and health needs.",
-    href: "/",
-    cta: "Learn more",
-    background: "/src/assets/nutrition.png",
-    className: "lg:col-span-2 lg:row-span-1",
+    tag: 'PLAN',
+    Icon: Apple,
+    name: 'Personalized nutrition',
+    description:
+      'A meal plan tuned to your goals and your schedule, adjusted automatically as your activity changes week to week.',
+    span: 'lg:col-span-2',
   },
-  /* 
-  {
-    Icon: FaFileMedical,
-    name: "Detailed Health Metrics Analysis and OPD/IPD Feature",
-    description: "Analyze your health metrics in detail and access OPD/IPD for medical consultations.",
-    href: "/",
-    cta: "Learn more",
-    background: "/src/assets/health-metrics.png",
-    className: "lg:col-span-2 lg:row-span-1",
-  }
-  */
 ];
 
 const Features = () => {
   return (
-    <div id="features" className="w-full py-32 bg-white text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 opacity-30" style={{
-          backgroundImage: 'radial-gradient(circle at center, black 1px, transparent 2px)',
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-20">
-          <h2 className="text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-6">
-            Our USP's
+    <div id="features" className="w-full py-32 bg-[#F6F4EE] relative">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="mb-16 max-w-xl">
+          <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#48C4A4]">
+            What FitFlow actually does
+          </span>
+          <h2 className="font-display mt-4 text-4xl md:text-5xl font-medium text-[#0B0F0E] leading-tight">
+            Four systems, one loop: move, get read, get told, improve.
           </h2>
-          <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {features.map((feature) => (
             <div
               key={feature.name}
-              className={`relative group ${feature.className} transform transition-all duration-300 hover:-translate-y-2`}
+              className={`group relative rounded-3xl bg-[#0B0F0E] p-8 overflow-hidden transition-transform duration-300 hover:-translate-y-1 ${feature.span}`}
             >
-              <div className="relative h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-800 to-gray-700 p-8 border border-gray-700">
-                {/* Background Overlay */}
-                <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-300">
-                  <img
-                    src={feature.background}
-                    alt=""
-                    className="h-full w-full object-cover filter blur-sm"
-                  />
-                </div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[#48C4A4]/10 to-transparent" />
 
-                {/* Content */}
-                <div className="relative z-10">
-                  <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
-                    <feature.Icon className="h-6 w-6 text-blue-400" />
-                  </div>
-
-                  <h3 className="mb-4 text-2xl font-bold tracking-tight text-white">
-                    {feature.name}
-                  </h3>
-
-                  <p className="mb-8 text-gray-300 leading-relaxed">
-                    {feature.description}
-                  </p>
-
-                  <a
-                    href={feature.href}
-                    className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-300"
-                  >
-                    <span>{feature.cta}</span>
-                    <svg
-                      className="ml-2 h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </a>
-                </div>
-
-                {/* Hover Effect Border */}
-                <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-blue-500/50 transition-colors duration-300"></div>
+              <div className="relative flex items-center justify-between">
+                <span className="font-mono text-[11px] tracking-[0.2em] text-[#48C4A4] border border-[#48C4A4]/30 rounded-full px-3 py-1">
+                  {feature.tag}
+                </span>
+                <feature.Icon className="h-6 w-6 text-[#48C4A4]" />
               </div>
+
+              <h3 className="relative mt-8 text-2xl font-display font-medium text-[#F6F4EE]">
+                {feature.name}
+              </h3>
+              <p className="relative mt-3 text-[#9CA6A1] leading-relaxed">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>
