@@ -1,60 +1,85 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+} from "react-icons/fa";
+
+const SOCIALS = [
+  { Icon: FaFacebook, href: "#", label: "Facebook" },
+  { Icon: FaTwitter, href: "#", label: "Twitter" },
+  { Icon: FaLinkedin, href: "#", label: "LinkedIn" },
+  { Icon: FaInstagram, href: "#", label: "Instagram" },
+];
+
+const QUICK_LINKS = [
+  "Home",
+  "Features",
+  "Community",
+  "Tutorials",
+  "Contact",
+];
 
 const Footer = () => {
   return (
-    <footer className="relative bg-white text-white pt-20 pb-10 overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 opacity-30" 
-          style={{
-            backgroundImage: `radial-gradient(circle at center, white 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}
-        />
-      </div>
+    <footer className="relative bg-[#0B0F0E] text-[#F6F4EE] pt-24 pb-10 overflow-hidden">
+      {/* Background Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.12] pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at center, #48C4A4 1px, transparent 1.5px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
 
-      {/* Decorative Blobs */}
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full filter blur-3xl" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl" />
+      {/* Glow Effects */}
+      <div className="absolute -bottom-40 -left-40 w-[30rem] h-[30rem] bg-[#48C4A4]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-32 right-0 w-[26rem] h-[26rem] bg-[#F2A93B]/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Left Column */}
-          <div className="backdrop-blur-lg bg-black/5 p-6 rounded-2xl border border-black/5">
-            <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4">
-              FitFlow
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+          {/* Brand */}
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
+            <h3 className="font-display text-3xl font-medium text-[#F6F4EE] mb-4">
+              Fit<span className="text-[#48C4A4]">Flow</span>
             </h3>
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              Achieve your fitness goals with our AI-powered platform. Track your workouts, compete with friends, and access expert guidance to stay on top of your health and fitness journey.
+
+            <p className="text-[#9CA6A1] leading-relaxed mb-7">
+              Real-time pose coaching that runs in your browser. Track every
+              rep, catch every form break, and train like someone's watching —
+              because something is.
             </p>
-            <div className="flex gap-6 text-2xl">
-              <a href="#" className="transform hover:scale-110 transition-all duration-300 text-gray-600 hover:text-blue-400">
-                <FaFacebook />
-              </a>
-              <a href="#" className="transform hover:scale-110 transition-all duration-300 text-gray-600 hover:text-blue-400">
-                <FaTwitter />
-              </a>
-              <a href="#" className="transform hover:scale-110 transition-all duration-300 text-gray-600 hover:text-blue-400">
-                <FaLinkedin />
-              </a>
-              <a href="#" className="transform hover:scale-110 transition-all duration-300 text-gray-600 hover:text-blue-400">
-                <FaInstagram />
-              </a>
+
+            <div className="flex gap-3">
+              {SOCIALS.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[#9CA6A1] hover:text-[#48C4A4] hover:border-[#48C4A4]/40 transition-colors duration-300"
+                >
+                  <social.Icon className="text-base" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Middle Column */}
-          <div className="backdrop-blur-lg bg-black/5 p-6 rounded-2xl border border-black/5">
-            <h4 className="text-xl font-bold text-blue-400 mb-6">Quick Links</h4>
-            <ul className="space-y-3">
-              {['Home', 'Features', 'Community', 'Tutorials', 'Contact'].map((link) => (
+          {/* Quick Links */}
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
+            <h4 className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#48C4A4] mb-6">
+              Quick Links
+            </h4>
+
+            <ul className="space-y-3.5">
+              {QUICK_LINKS.map((link) => (
                 <li key={link}>
                   <a
                     href={`/${link.toLowerCase()}`}
-                    className="text-gray-600 hover:text-blue-400 transition-colors duration-300 flex items-center group"
+                    className="group flex items-center text-[#9CA6A1] hover:text-[#F6F4EE] transition-colors duration-300"
                   >
-                    <span className="w-0 group-hover:w-4 h-0.5 bg-blue-400 mr-0 group-hover:mr-2 transition-all duration-300"></span>
+                    <span className="w-0 group-hover:w-3.5 h-px bg-[#48C4A4] mr-0 group-hover:mr-2.5 transition-all duration-300" />
                     {link}
                   </a>
                 </li>
@@ -62,22 +87,51 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Right Column */}
-          <div className="backdrop-blur-lg bg-black/5 p-6 rounded-2xl border border-black/5">
-            <h4 className="text-xl font-bold text-blue-400 mb-6">Contact Us</h4>
+          {/* Contact */}
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
+            <h4 className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#48C4A4] mb-6">
+              Contact Us
+            </h4>
+
             <a
               href="mailto:support@fitflow.com"
-              className="text-gray-600 hover:text-blue-400 transition-colors duration-300 block mb-6"
+              className="text-[#F6F4EE] hover:text-[#48C4A4] transition-colors duration-300 block mb-5"
             >
               support@fitflow.com
             </a>
-            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-6"></div>
-            <p className="text-gray-600">© 2025 FitFlow. All Rights Reserved.</p>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-6" />
+
+            <p className="font-mono text-[11px] tracking-widest uppercase text-[#6C756F]">
+              No sign-up · no upload · webcam stays on-device
+            </p>
           </div>
         </div>
 
-        {/* Bottom Border */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+        {/* Bottom */}
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 text-sm">
+          <p className="text-[#6C756F]">
+            &copy; {new Date().getFullYear()} FitFlow. All rights reserved.
+          </p>
+
+          <div className="flex gap-6 font-mono text-[11px] tracking-widest uppercase text-[#6C756F]">
+            <a
+              href="/privacy"
+              className="hover:text-[#48C4A4] transition-colors duration-300"
+            >
+              Privacy
+            </a>
+
+            <a
+              href="/terms"
+              className="hover:text-[#48C4A4] transition-colors duration-300"
+            >
+              Terms
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
