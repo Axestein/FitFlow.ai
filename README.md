@@ -52,6 +52,7 @@ Smart AI-powered fitness companion with real‑time pose detection, gamified pro
 
 <img width="798" height="477" alt="Screenshot 2025-09-07 162708" src="https://github.com/user-attachments/assets/df717d5c-140f-41db-a3d9-a4ee9c5986e3" />
 
+<img width="798" alt="shapes at 25-05-02 08 43 22" src="https://github.com/user-attachments/assets/77ce0c54-825c-4d88-ac6e-13118722ef08" />
 
 ---
 
@@ -189,8 +190,6 @@ FitFlow.ai-master/
 Contributions are welcome! Feel free to open issues or PRs. Please keep code readable and consistent, and add clear descriptions to changes.
 
 ---
-
-<img width="430" alt="shapes at 25-05-02 08 43 22" src="https://github.com/user-attachments/assets/77ce0c54-825c-4d88-ac6e-13118722ef08" />
 
 <div align="center">
 
