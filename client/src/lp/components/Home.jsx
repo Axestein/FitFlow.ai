@@ -28,11 +28,16 @@ const Home = () => {
           </div>
 
           <h1 className="font-display mt-8 text-5xl md:text-7xl font-medium leading-[0.98] text-[#F6F4EE]">
-            Train like
-            <br />
-            someone&rsquo;s watching.
-            <br />
-            <span className="text-[#48C4A4]">Because something is.</span>
+          Every rep,
+          <br />
+          every angle,
+          <br />
+          <span className="relative inline-block">
+            <span className="bg-gradient-to-r from-[#48C4A4] to-[#7FE0C4] bg-clip-text text-transparent">
+              watched like a coach.
+            </span>
+          <span className="absolute -inset-x-2 -inset-y-1 bg-[#48C4A4]/20 blur-2xl -z-10" />
+          </span>
           </h1>
 
           <p className="mt-7 max-w-md text-lg text-[#9CA6A1] leading-relaxed">
@@ -43,7 +48,7 @@ const Home = () => {
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
-              to="/dashboard"
+              to="/login"
               className="group inline-flex items-center gap-2 rounded-full bg-[#48C4A4] text-[#06110D] font-display font-semibold text-lg px-8 py-4 transition-transform duration-300 hover:scale-[1.03]"
             >
               Get Started
